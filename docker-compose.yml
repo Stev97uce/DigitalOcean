@@ -1,0 +1,23 @@
+networks:
+  test_network:
+    driver: bridge
+
+
+services:
+  back:
+    build: ./app/Back
+    ports:
+      - "5000:5001"
+    networks:
+      - ventas_network
+    restart: always
+
+
+  front:
+    build: ./app/Front
+    ports:
+      - "80:80"
+    depends_on:
+      - back
+    networks:
+      - ventas_network
